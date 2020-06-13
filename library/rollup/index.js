@@ -12,22 +12,22 @@ class rollup {
     diffImport () {
         const {oldConfig,config} = this
         const obj = {}
-        Object.keys(config).forEach((e)=>{
+        Object.keys(config.input).forEach((e)=>{
             if (!oldConfig[e]) {
-                obj[e] = config[e]
+                obj[e] = config.input[e]
             }
         })
         return {
-            len:Object.keys(obj),
+            len:Object.keys(obj).length,
             obj
         }
     }
 
     async execute() {
-        fs.writeFileSync('cache/importMap.json',JSON.stringify(this.inputConfig.input))
         const diffImport = this.diffImport()
         if (diffImport.len > 0) {
-            const packageBundle = await roll.rollup({input:diffImport.obj})
+            const packageBundle = await roll.rollup(config.input({input:diffImport.obj}))
+            fs.writeFileSync('cache/importMap.json', JSON.stringify(this.inputConfig.input))
             return packageBundle.write(this.outConfig);
         }else {
             return 

@@ -21,7 +21,6 @@ function getInjectorCode(name, code) {
 function rollupPluginCss() {
     return {
         name: 'snowpack:rollup-plugin-css',
-
         // resolveId(source, importer) {
         //     console.log('importer', importer,source)
         //     if (!source.endsWith('css')) {

@@ -30,7 +30,6 @@ class FileContainers {
                 const source = path.node.source
                 const specifiers = path.node.specifiers
                 if (source && source.value.indexOf('./') == -1) {
-                    source.value = '/web_modules/' + source.value + '.js'
                     if (!that.importsObj[source.value]) {
                         const nodePath = p.join(that.basePath, 'node_modules')
                         const indexjs = p.join(nodePath, source.value, 'index.js')
@@ -41,6 +40,7 @@ class FileContainers {
                             that.importsObj[source.value] = js
                         }
                     }
+                    source.value = '/web_modules/' + source.value + '.js'
                 }else if (source.value.indexOf('.css')!==-1){
                     source.value += '.proxy.js'
                 }

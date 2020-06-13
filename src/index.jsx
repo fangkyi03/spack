@@ -1,14 +1,17 @@
-import styles from './index.css'
+// import styles from './index.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from 'antd'
+import {Button, Progress} from 'antd'
+// import Button from 'antd/es/button/index'
+// import 'antd/es/button/style/css'
 // import Layout from './components/Layout/index';
 // import routerData from './router'
 // import {BrowserRouter as Router,Route, Switch} from 'react-router-dom'
-console.log('styles',styles)
 function App() {
   return (
-    <div className={styles.a1}>123123123</div>
+    <div>
+      <Progress percent={30}></Progress>
+    </div>
   )
 }
 console.log('13123')
