@@ -35,16 +35,18 @@ function input(config) {
     //     }
     // })
 
-    // config.input = {
-    //     'antd/es/button': config.input['antd/es/button'],
-    //     // 'antd/es/button/style/css': config.input['antd/es/button/style/css'],
-    //     // 'react-dom':config.input['react-dom']
-    // }
+        // config.input = {
+        //     'react': config.input['react'],
+        //     'antd/es/button':config.input['antd/es/button'],
+        //     'antd/es/button/style/css': config.input['antd/es/button/style/css'],
+        //     'react-dom':config.input['react-dom']
+        // }
     return {
         external: [],
         treeshake: {
             moduleSideEffects: 'no-external'
         },
+        cache:config.input,
         ...config,
         plugins: [
             rollupPluginReplace(getRollupReplaceKeys({

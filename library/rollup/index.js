@@ -24,9 +24,14 @@ class rollup {
     }
 
     async execute() {
-        const packageBundle = await roll.rollup(this.inputConfig)
-        fs.writeFileSync('cache/importMap.json', JSON.stringify(this.inputConfig.input))
-        return packageBundle.write(this.outConfig);
+        const diffImport = this.diffImport()
+        if (diffImport.len > 0) {
+            const packageBundle = await roll.rollup(this.inputConfig)
+            fs.writeFileSync('cache/importMap.json', JSON.stringify(this.inputConfig.input))
+            return packageBundle.write(this.outConfig);
+        }else {
+            return 
+        }
     }
 }
 
