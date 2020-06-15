@@ -28,7 +28,6 @@ class FileContainers {
         traverse(ast,{
             ImportDeclaration(path){
                 const source = path.node.source
-                const specifiers = path.node.specifiers
                 if (source && source.value.indexOf('./') == -1) {
                     if (!that.importsObj[source.value]) {
                         const nodePath = p.join(that.basePath, 'node_modules')
