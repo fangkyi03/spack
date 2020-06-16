@@ -27,16 +27,12 @@ class dev {
         }
     }
 
-    getState (extName) {
-        return this.state[extName] || {}
-    }
-
     getLoaderParams(filePath, extName) {
         return {
             context:fs.readFileSync(filePath,'utf-8'),
             config:this.config,
             filePath,
-            state:this.getState(extName)
+            state:this.state
         }
     }
 
@@ -65,7 +61,7 @@ class dev {
     }
 
     startPlugin(plugin) {
-        plugin.forEach((e)=>e(this.getPluginParam()))
+        plugin.forEach(async(e)=> await e(this.getPluginParam()))
     }
 }
 module.exports = dev

@@ -26,21 +26,6 @@ function isTruthy(item) {
 }
 
 function input(config) {
-    // delete config.input['react-router-dom']
-    // delete config.input['react']
-    // delete config.input['react-dom']
-    // Object.keys(config.input).forEach((e)=>{
-    //     if (e.indexOf('css') !== -1) {
-    //         delete config.input[e]
-    //     }
-    // })
-
-        // config.input = {
-        //     'react': config.input['react'],
-        //     'antd/es/button':config.input['antd/es/button'],
-        //     'antd/es/button/style/css': config.input['antd/es/button/style/css'],
-        //     'react-dom':config.input['react-dom']
-        // }
     return {
         external: [],
         treeshake: {

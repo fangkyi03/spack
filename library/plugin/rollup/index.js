@@ -1,10 +1,15 @@
 const config = require('./config')
 const roll = require('rollup')
 const fs = require('fs')
-function rollup () {
-    return ({state})=>{
-        console.log('state',state)
-        // roll.rollup()
+const rollupInputConfig = require('./config/input')
+function rollup ({out}) {
+    return async({state})=>{
+        if (state.importsObj) {
+            console.log('打包中')
+            const packageBundle = await roll.rollup(rollupInputConfig({ input: state.importsObj}))
+            console.log('打包结束')
+            packageBundle.write(out);
+        }
     }
 }
 

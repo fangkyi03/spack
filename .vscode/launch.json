@@ -11,7 +11,6 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "cwd": "/Users/mac/Desktop/spack",
             "program": "${workspaceFolder}/index.js"
         }
     ]

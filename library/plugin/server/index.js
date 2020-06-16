@@ -4,8 +4,7 @@ const mime = require('mime-types')
 const etag = require('etag')
 const p = require('path')
 const fs = require('fs')
-const c = require('../cache')
-const cache = require('../cache')
+const cache = require('../../cache')
 const watch = require('watch')
 
 class Server {

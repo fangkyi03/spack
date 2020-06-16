@@ -1,6 +1,13 @@
 const dev = require('./dev')
 const build = require('./build')
-module.exports = {
-    dev,
-    build
+
+function spack(config) {
+    const { mode = 'dev' } = config
+    if (mode == 'dev') {
+        return new dev(config)
+    } else {
+        build(config)
+    }
 }
+
+module.exports = spack
