@@ -34,10 +34,12 @@ function rollup ({out}) {
             const diffImportArr = diffImport(getOldImport(),state.importsObj)
             if (diffImportArr.len > 0) {
                 console.log('打包中')
+                fs.writeFileSync('cache/importMap.json', JSON.stringify(state.importsObj), 'utf-8')
                 const packageBundle = await roll.rollup(rollupInputConfig(state.importsObj))
                 console.log('打包结束')
                 return packageBundle.write(out);
             }else {
+                fs.writeFileSync('cache/importMap.json',JSON.stringify(state.importsObj),'utf-8')
                 return 
             }
         }else {
