@@ -60,8 +60,10 @@ class dev {
         }
     }
 
-    startPlugin(plugin) {
-        plugin.forEach(async(e)=> await e(this.getPluginParam()))
+    async startPlugin(plugin) {
+        for(let i = 0 ;i < plugin.length;i++ ) {
+            await plugin[i](this.getPluginParam())
+        }
     }
 }
 module.exports = dev
