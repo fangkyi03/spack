@@ -25,14 +25,13 @@ function isTruthy(item) {
     return Boolean(item);
 }
 
-function input(config) {
+function input(input) {
     return {
         external: [],
         treeshake: {
             moduleSideEffects: 'no-external'
         },
-        cache:config.input,
-        ...config,
+        input,
         plugins: [
             rollupPluginReplace(getRollupReplaceKeys({
                 NODE_ENV: "development"

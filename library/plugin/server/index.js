@@ -5,7 +5,6 @@ const etag = require('etag')
 const p = require('path')
 const fs = require('fs')
 const cache = require('../../cache')
-const watch = require('watch')
 
 class Server {
     constructor(config){
@@ -61,14 +60,16 @@ class Server {
     openServer() {
         app.get('*',(req,res)=>this.onServerCallBack(req,res))
         app.listen(3000, () => console.log(`Example app listening on port ${3000}!`))
-        var that = this
-        watch.createMonitor(p.join(process.cwd(),'src'), (monitor)=>{
-            // monitor.files[p.join(process.cwd(),'src','index.jsx')]
-            monitor.on('changed',(data)=>{
-                console.log('that',)
-            })
-        })
     }
 }
 
-module.exports = Server
+function server(config) {
+    return ({state})=> {
+        if (!state.httpServer) {
+            state.httpServer = true
+            const httpServer = new Server(config)
+            httpServer.openServer()
+        }
+    }
+}
+module.exports = server

@@ -2,15 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button,Progress} from 'antd'
-// import Button from 'antd/es/button/index'
-// import 'antd/es/button/style/css'
-// import Layout from './components/Layout/index';
-// import routerData from './router'
 import Router from 'react-router-dom'
 function App () {
   return (
     <div>
-      <Button>131</Button>
+      <Button>1313123</Button>
     </div>
   )
 }

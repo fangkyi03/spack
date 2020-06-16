@@ -1,6 +1,6 @@
 const spack = require('./library/cli')
 const { jsLoader } = require('./library/loader')
-const { rollup } = require('./library/plugin')
+const { rollup,httpServer } = require('./library/plugin')
 spack({
     loaders:[
         {
@@ -19,6 +19,10 @@ spack({
                 exports: 'named',
                 chunkFileNames: 'common/[name]-[hash].js'
             }
+        }),
+        httpServer({
+            port:3000,
+            openBrowser:true
         })
     ]
 })
