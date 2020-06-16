@@ -1,6 +1,6 @@
-const rollup = require('./rollup')
 const loader = require('./loader')
+const spack = require('./spack')
 module.exports = {
-    rollup,
-    loader
+    loader,
+    spack
 }
