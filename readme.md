@@ -18,3 +18,10 @@ spack有别于snowpack 其本质上只有两个概念 一个loader一个plugin
 
 就可以直接通过jsloader写入的state来判断是否要执行压缩
 
+
+# 未完成功能
+1.监听文件改变
+2.less sass
+
+# 已完成功能
+1.cssModules

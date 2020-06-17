@@ -12,3 +12,8 @@ body .ant-popover-inner-content {
 .a1 {
     background: red;
 }
+
+.main {
+    background: red;
+    display: flex;
+}

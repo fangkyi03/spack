@@ -1,5 +1,6 @@
 const fs = require('fs')
 const p = require('path')
+const tool = require('../command/tool')
 class dev {
     constructor(config) {
         this.state = {}
@@ -31,7 +32,7 @@ class dev {
         return {
             context:fs.readFileSync(filePath,'utf-8'),
             config:this.config,
-            filePath,
+            filePath:tool.getName(filePath),
             state:this.state
         }
     }
@@ -49,7 +50,11 @@ class dev {
                 const extName = p.extname(filePath)
                 const findLoader = loaders.filter((e) => e.test.test(extName)).reduce((a,b)=>a.concat(b.loader),[])
                 if (findLoader.length == 0) return null
-                that.compose(findLoader)(that.getLoaderParams(filePath, extName))
+                try {
+                    that.compose(findLoader)(that.getLoaderParams(filePath, extName))   
+                } catch (error) {
+                    console.log(object)
+                }
             }
         })
     }

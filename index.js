@@ -1,5 +1,5 @@
 const spack = require('./library/cli')
-const { jsLoader } = require('./library/loader')
+const { jsLoader,cssLoader } = require('./library/loader')
 const { rollup,httpServer } = require('./library/plugin')
 spack({
     loaders:[
@@ -7,6 +7,12 @@ spack({
             test:/.js/,
             loader:[
                 jsLoader()
+            ]
+        },
+        {
+            test:/.css/,
+            loader:[
+                cssLoader()
             ]
         }
     ],
