@@ -5,6 +5,7 @@ const WebSocketServer = require('ws').Server
 const tool = require('../command/tool')
 const chokidar = require('chokidar')
 const child_process = require('child_process')
+const co = require('co')
 class dev {
     constructor(config) {
         this.state = {}
@@ -91,10 +92,16 @@ class dev {
                 ignoreInitial: true,
                 disableGlobbing: false
             })
-            watch.on('change', (filePath)=>{
-                this.sendLoaderActive(filePath)
-                this.startPlugin(this.config.plugin)
-                wss.send('1')
+            watch.once('change', (filePath)=>{
+                try {
+                    Promise.all([this.sendLoaderActive(filePath), this.startPlugin(this.config.plugin)])
+                    .then(() => {
+                        console.log('执行完毕')
+                        wss.send('1')
+                    })   
+                } catch (error) {
+                    console.log('编译异常,请尝试重新运行!!!')
+                }
             })
         })
     }

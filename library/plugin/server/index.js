@@ -5,7 +5,7 @@ const etag = require('etag')
 const p = require('path')
 const fs = require('fs')
 const cache = require('../../cache')
-
+const open = require('open')
 class Server {
     constructor(config){
         this.config = config
@@ -111,6 +111,7 @@ class Server {
     openServer() {
         app.get('*',(req,res)=>this.onServerCallBack(req,res))
         app.listen(3000, () => console.log(`Example app listening on port ${3000}!`))
+        open('http://127.0.0.1:3000')
     }
 }
 
