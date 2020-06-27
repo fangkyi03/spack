@@ -3,6 +3,7 @@ const postCssModules = require('postcss-modules')
 const cssnext = require('postcss-cssnext')
 const cssnano = require('cssnano')
 const cache = require('../cache')
+const pxtovw = require('postcss-plugin-pxtoviewport')
 
 function createCSS(filePath,json,text) {
     const str = `
@@ -25,6 +26,20 @@ function cssLoader() {
                 postCss([
                     cssnext(),
                     cssnano(),
+                    pxtovw({
+                        viewportWidth: 750,
+                        viewportHeight: 1334,
+                        unitPrecision: 5,
+                        viewportUnit: 'vw',
+                        selectorBlackList: [],
+                        propList: [],
+                        minPixelValue: 1,
+                        mediaQuery: false,
+                        rootValue: 16,
+                        toRem: false,
+                        toViewport: true,
+                        isSavePx: false
+                    }),
                     postCssModules({
                         getJSON: function () {
 
@@ -43,6 +58,20 @@ function cssLoader() {
                 postCss([
                     cssnext(),
                     cssnano(),
+                    pxtovw({
+                        viewportWidth: 750,
+                        viewportHeight: 1334,
+                        unitPrecision: 5,
+                        viewportUnit: 'vw',
+                        selectorBlackList: [],
+                        propList: [],
+                        minPixelValue: 1,
+                        mediaQuery: false,
+                        rootValue: 16,
+                        toRem: false,
+                        toViewport: true,
+                        isSavePx: false
+                    }),
                 ]).process(data.context, { from: data.filePath })
                 .then((e) => {
                     createCSS(data.filePath, {}, e.css)
@@ -52,4 +81,7 @@ function cssLoader() {
         })
     }
 }
-module.exports = cssLoader
+module.exports = {
+    default:cssLoader,
+    createCSS
+}

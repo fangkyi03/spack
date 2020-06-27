@@ -1,4 +1,4 @@
-const pages = ['pages/index/index'];
+const pages = ['pages/home/index'];
 
 module.exports.ali = {
   pages,

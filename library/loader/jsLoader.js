@@ -3,7 +3,7 @@ const traverse = require('@babel/traverse').default
 const cache = require('../cache')
 const p = require('path')
 const fs = require('fs')
-
+const createCSS = require('./cssLoader').createCSS
 function jsLoader() {
     function injection() {
         return `
@@ -25,10 +25,13 @@ function jsLoader() {
             ImportDeclaration(path) {
                 const source = path.node.source
                 if (source && source.value.indexOf('./') == -1) {
-                    // if (source.value == 'remax/one') {
-                    //     path.remove()
-                    //     return 
-                    // }
+                    if (source.value.indexOf('css') !== -1) {
+                        const content = fs.readFileSync(p.join(config.cwd, 'node_modules',source.value),'utf-8')
+                        const name = 'src/' + source.value + '.proxy.js'
+                        source.value = '/' + name
+                        createCSS(name,{},content)
+                        return 
+                    }
                     if (!state.importsObj[source.value]) {
                         const nodePath = p.join(config.cwd, 'node_modules')
                         const indexjs = p.join(nodePath, source.value, 'index.js')

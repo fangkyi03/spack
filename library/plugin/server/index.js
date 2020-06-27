@@ -64,10 +64,7 @@ class Server {
                     <div id="root"></div>
                     <noscript>You need to enable JavaScript to run this app.</noscript>
                     <script>
-                    window.wx = {}
-                    window.getApp = function() {
-                        return {}
-                    }
+                    window.require = (path) => path;
                     </script>
                     <script type="module">
                         import App from '/src/app.js';
