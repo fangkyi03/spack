@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index",
-    "dev:wechat": "remax build -w -t wechat",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:wechat": "cross-env platform=wechat remax build -w -t wechat"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +22,7 @@
     "@rollup/plugin-replace": "^2.1.0",
     "babel-plugin-import": "^1.13.0",
     "chokidar": "^3.4.0",
+    "cross-env": "^7.0.2",
     "cssnano": "^4.1.10",
     "cssnext": "^1.8.4",
     "etag": "^1.8.1",

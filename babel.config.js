@@ -26,7 +26,7 @@ module.exports = function(api){
                 }
             ],
             ['./babel-plugin-ant-design-icon.js'],
-            ['./babel-plugin-remax-component.js']
+            process.env.platform !== 'wechat' ? ['./babel-plugin-remax-component.js'] : {}
         ]
     }
 }

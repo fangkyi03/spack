@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button,View} from 'remax/one'
+import {Button,View} from 'remax/wechat'
 export default function Index() {
     function onJump() {
         window.location.href = '/home'

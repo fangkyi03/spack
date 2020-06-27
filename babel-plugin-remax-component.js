@@ -3,7 +3,7 @@ module.exports = function ({ types: t }) {
         visitor: {
             ImportDeclaration(path) {
                 const current = path.node
-                if (current.source.value == 'remax/one') {
+                if (current.source.value == 'remax/wechat') {
                     const arr = current.specifiers.map((e) => {
                         if (e.type !== 'ImportSpecifier') return null
                         const importName = e.imported.name
