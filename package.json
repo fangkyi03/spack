@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index",
+    "dev:wechat": "remax build -w -t wechat",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

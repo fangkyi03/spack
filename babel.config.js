@@ -13,12 +13,12 @@ module.exports = function(api){
                     "style": "css"
                 }
             ],
-            [
-                "@babel/plugin-proposal-decorators",
-                {
-                    "legacy": true
-                }
-            ],
+            // [
+            //     "@babel/plugin-proposal-decorators",
+            //     {
+            //         "legacy": true
+            //     }
+            // ],
             [
                 "@babel/plugin-proposal-class-properties",
                 {
