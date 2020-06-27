@@ -19,7 +19,7 @@ spack({
     plugin:[
         rollup({
             out:{
-                dir: 'cache',
+                dir: 'web_modules',
                 format: 'esm',
                 sourcemap: false,
                 exports: 'named',

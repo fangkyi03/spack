@@ -4,14 +4,20 @@ const watch = require('watch')
 const WebSocketServer = require('ws').Server
 const tool = require('../command/tool')
 const chokidar = require('chokidar')
+const child_process = require('child_process')
 class dev {
     constructor(config) {
         this.state = {}
         this.config = this.merge(config,this.getDefault())
+        // this.copyComponent()
         this.scanDir(this.config.input)
         this.startPlugin(this.config.plugin)
         this.startWebSocket()
         this.startWatcher()
+    }
+
+    copyComponent () {
+        child_process.execSync('cp -r library/components web_modules/')
     }
 
     merge (a,b) {
@@ -57,7 +63,7 @@ class dev {
             const filePath = p.join(dir, e)
             if (e == '.DS_Store') return
             if (fs.statSync(filePath).isDirectory()) {
-                scanDir(filePath)
+                this.scanDir(filePath)
             } else {
                 that.sendLoaderActive(filePath)
             }

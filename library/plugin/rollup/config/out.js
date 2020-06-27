@@ -1,6 +1,6 @@
 function out(config) {
     return {
-        dir: 'cache',
+        dir: 'web_modules',
         format: 'esm',
         sourcemap: false,
         exports: 'named',

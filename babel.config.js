@@ -25,7 +25,8 @@ module.exports = function(api){
                     "loose": true
                 }
             ],
-            ['./babel-plugin-ant-design-icon.js']
+            ['./babel-plugin-ant-design-icon.js'],
+            ['./babel-plugin-remax-component.js']
         ]
     }
 }

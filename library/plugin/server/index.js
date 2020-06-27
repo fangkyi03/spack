@@ -24,7 +24,11 @@ class Server {
         res.end()
     }
 
-    readFile(filePath) {
+    readFile (filePath) {
+        return fs.readFileSync(p.join(process.cwd(), filePath), 'utf-8')
+    }
+
+    readPublicFile(filePath) {
         return fs.readFileSync(p.join(process.cwd(),'public',filePath),'utf-8')
     }
 
@@ -45,15 +49,78 @@ class Server {
         return fs.readFileSync(p.join(process.cwd(), 'public', filePath), 'utf-8')
     }
 
+    createHTML(url) {
+        return `
+            <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="utf-8" />
+                    <link rel="icon" href="/favicon.ico" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <meta name="description" content="Web site created using create-snowpack-app" />
+                    <title>测试</title>
+                </head>
+                <body>
+                    <div id="root"></div>
+                    <noscript>You need to enable JavaScript to run this app.</noscript>
+                    <script>
+                    window.wx = {}
+                    window.getApp = function() {
+                        return {}
+                    }
+                    </script>
+                    <script type="module">
+                        import App from '/src/app.js';
+                        import Page from '/${url}/index.js';
+                        import React from '/web_modules/react.js';
+                        import ReactDom from '/web_modules/react-dom.js';
+                        // React.forwardRef = function forwardRef(Component) {
+                        //     const obj = {
+                        //         'Button':'button',
+                        //         'Form':'form',
+                        //         'Image':'img',
+                        //         'Label':'label',
+                        //         'Text':'span',
+                        //         'View':'div',
+                        //         'WebView':'iframe',
+                        //         'Navigator':'link'
+                        //     }[Component.displayName]
+                        //     console.log(Component)
+                        //     return (props, ref)=>{
+                        //         return React.createElement(obj, { ...props},props.children)
+                        //     }
+                        // }
+                        ReactDom.render(
+                            React.createElement(App,{},React.createElement(Page)),
+                            document.getElementById('root')
+                        );
+                    </script>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+                    <script>
+                    var ws = new WebSocket('ws://localhost:8001');
+                    ws.onmessage = function(e){
+                        console.log('接受返回数据',e)
+                        window.location.reload()
+                    }
+                    </script>
+                </body>
+            </html>
+        `
+    }   
+
     onServerCallBack (req,res) {
-        if (req.path.indexOf('web_modules') !== -1) {
-            this.getData(this.readCacheFile(req.path.replace('/web_modules/','')), res)
-        } else if (req.path == '/' || req.path == '/favicon.ico'){
-            res.send(this.readFile('index.html'))
-        }else if (req.path.indexOf('dist') !== -1 ){
-            this.getData(this.readPublicFile(req.path.replace('/dist/', '')), res)
-        }else {
-            this.getData(this.readSrcFile(req.path.replace('/src/', 'src/')), res)
+        if (fs.existsSync(p.join(process.cwd(), req.path))) {
+            if (req.path == '/') {
+                return res.send(this.createHTML(p.join('src', 'pages', 'index')))
+            }else if (req.path.indexOf('web_modules') !== -1) {
+                return this.getData(this.readFile(req.path), res)
+            }else {
+                return this.getData(this.readSrcFile(req.path.replace('/src/', 'src/')), res)
+            }
+        } else if (fs.existsSync(p.join(process.cwd(),'src','pages',req.path))){
+            return res.send(this.createHTML(p.join('src', 'pages',req.path)))
+        } else {
+            return this.getData(this.readSrcFile(req.path.replace('/src/', 'src/')), res)
         }
     }
 

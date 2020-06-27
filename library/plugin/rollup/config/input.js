@@ -26,6 +26,11 @@ function isTruthy(item) {
 }
 
 function input(input) {
+    input = {
+        ...input,
+        'react':'node_modules/react/index.js',
+        'react-dom':'node_modules/react-dom/index.js',
+    }
     return {
         external: [],
         treeshake: {

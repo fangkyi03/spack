@@ -10,6 +10,12 @@
   <body>
     <div id="root"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      window.wx = {}
+      window.getApp = function() {
+        return {}
+      }
+    </script>
     <script type="module" src="/src/index.jsx"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script>
