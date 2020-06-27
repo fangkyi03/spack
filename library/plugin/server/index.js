@@ -74,22 +74,6 @@ class Server {
                         import Page from '/${url}/index.js';
                         import React from '/web_modules/react.js';
                         import ReactDom from '/web_modules/react-dom.js';
-                        // React.forwardRef = function forwardRef(Component) {
-                        //     const obj = {
-                        //         'Button':'button',
-                        //         'Form':'form',
-                        //         'Image':'img',
-                        //         'Label':'label',
-                        //         'Text':'span',
-                        //         'View':'div',
-                        //         'WebView':'iframe',
-                        //         'Navigator':'link'
-                        //     }[Component.displayName]
-                        //     console.log(Component)
-                        //     return (props, ref)=>{
-                        //         return React.createElement(obj, { ...props},props.children)
-                        //     }
-                        // }
                         ReactDom.render(
                             React.createElement(App,{},React.createElement(Page)),
                             document.getElementById('root')

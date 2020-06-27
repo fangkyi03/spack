@@ -21,23 +21,34 @@ function createCSS(filePath,json,text) {
 function cssLoader() {
     return (data)=>{
         return new Promise((resolve, reject) => {
-            postCss([
-                cssnext(),
-                cssnano(),
-                postCssModules({
-                    getJSON:function() {
-                        
-                    },
-                    generateScopedName: "[name]__[local]___[hash:base64:5]",
-                }),
-            ]).process(data.context, { from: data.filePath })
-            .then((e) => {
-                const find = e.messages.find((el) => el.plugin == 'postcss-modules')
-                if (find) {
-                    createCSS(data.filePath, find.exportTokens,e.css)
+            if (data.filePath.indexOf('module') !== -1) {
+                postCss([
+                    cssnext(),
+                    cssnano(),
+                    postCssModules({
+                        getJSON: function () {
+
+                        },
+                        generateScopedName: "[name]__[local]___[hash:base64:5]",
+                    }),
+                ]).process(data.context, { from: data.filePath })
+                .then((e) => {
+                    const find = e.messages.find((el) => el.plugin == 'postcss-modules')
+                    if (find) {
+                        createCSS(data.filePath, find.exportTokens, e.css)
+                        resolve()
+                    }
+                })  
+            }else {
+                postCss([
+                    cssnext(),
+                    cssnano(),
+                ]).process(data.context, { from: data.filePath })
+                .then((e) => {
+                    createCSS(data.filePath, {}, e.css)
                     resolve()
-                }
-            })  
+                })  
+            }
         })
     }
 }
